@@ -9,10 +9,16 @@ import UIKit
 
 class SelectedImageCollectionViewCell: UICollectionViewCell {
     
+    let photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .red
+        addSubview(photoImageView)
+        photoImageView.applyViewIntoSuperView()
         
     }
     

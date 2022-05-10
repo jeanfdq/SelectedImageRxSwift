@@ -8,7 +8,9 @@
 import RxSwift
 
 class ViewController: UIViewController {
-
+    
+    let disposeBag = DisposeBag()
+    
     let selectedImage: UIImageView = {
         let iv = UIImageView()
         return iv
@@ -34,9 +36,14 @@ class ViewController: UIViewController {
     fileprivate func goPhotoLibrary(){
         let layout = UICollectionViewFlowLayout()
         let libraryVC = SelectedImageCollectionViewController(collectionViewLayout: layout)
+        
+        libraryVC.selectedPhoto.subscribe(onNext: { [weak self] photo in
+            self?.selectedImage.image = photo
+        }).disposed(by: disposeBag)
+        
         self.present(libraryVC, animated: true)
     }
-
-
+    
+    
 }
 
